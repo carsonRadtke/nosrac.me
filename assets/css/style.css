@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body {
+    color: #794044;
+    background-color: #f0f8ff;
+}
+
+a {
+    padding: 0px 10px;
+    color: #794044;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div {
+    width: 100%;
+}
+
+#interative {
+    height: 25%;
+}
+
+#content {
+    height: 70%;
+}
+
+#footer {
+    height: 5%;
+}
+
+img {
+    width: 80px;
+    height: 80px;
+    padding: 0px 30px;
+    margin-top: 100px;
+}
+
+img:hover {
+    width: 100px;
+    height: 100px;
+    margin-top: 80px;
+    padding: 0px 20px;
+    cursor: pointer;
+}
