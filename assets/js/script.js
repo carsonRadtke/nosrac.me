@@ -1,7 +1,7 @@
 document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear() + " Carson Radtke";
 
 (() => {
-    var CONST_1 = 0.05;
+    var CONST_1 = 0.12;
     var CONST_2 = 25;
     var CONST_3 = "Carson Radtke";
 
@@ -11,14 +11,14 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-    canvas.width = 500;
+    canvas.width = canvas.parentElement.clientWidth*2/3;
     canvas.height = canvas.parentElement.clientHeight;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#794044";
-    ctx.font = (canvas.height >> 2) + "px sans-serif";
+    ctx.font = (canvas.height / 5) + "px Baloo Chettan, cursive";
     ctx.fillText(CONST_3, canvas.width >> 1, canvas.height >> 1);
 
     var pos = [];
@@ -26,7 +26,10 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
 
     for (var x = 0; x < canvas.width; x++) {
         for (var y = 0; y < canvas.height; y++) {
-            if (ctx.getImageData(x, y, 1, 1).data[0] != 0) des[des.length] = pos[pos.length] = [x, y];
+            if (ctx.getImageData(x, y, 1, 1).data[0] != 0) {
+                des[des.length] = [x, y];
+                pos[pos.length] = [Math.random() * canvas.width, Math.random() * canvas.height];
+            }
         }
     }
 
@@ -36,7 +39,17 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
     }
 
     setInterval(() => {
+        drawBackground();
+        drawText();
+    }, 40);
+
+    var drawBackground = function() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#79044";
+        ctx.fillRect(0, canvas.height * 3 / 4, canvas.width, 1);
+    }
+
+    var drawText = function() {
         ctx.fillStyle = "#79044";
         for (var x = 0; x < pos.length; x++) {
             pos[x][0] += (des[x][0] - pos[x][0]) * CONST_1;
@@ -46,7 +59,6 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
             var dy = lastY - pos[x][1];
             if (Math.sqrt(dx * dx + dy * dy) < CONST_2 && Math.random() < CONST_1) pos[x] = [Math.random() * canvas.width, Math.random() * canvas.height];
         }
-        ctx.fillRect(0, canvas.height * 3 / 4, canvas.width, 1);
-    }, 1);
+    }
 
 })();
