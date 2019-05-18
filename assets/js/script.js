@@ -1,7 +1,7 @@
-document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear() + " Carson Radtke";
+document.getElementById("copy").innerHTML = "&copy; " + (new Date()).getFullYear() + " Carson Radtke";
 
 (() => {
-    var CONST_1 = 0.12;
+    var CONST_1 = 0.08;
     var CONST_2 = 25;
     var CONST_3 = "Carson Radtke";
 
@@ -11,7 +11,7 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-    canvas.width = canvas.parentElement.clientWidth*2/3;
+    canvas.width = canvas.parentElement.clientWidth * 2 / 3;
     canvas.height = canvas.parentElement.clientHeight;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -38,18 +38,19 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
         lastY = e.offsetY;
     }
 
-    setInterval(() => {
+    var loop = () => {
         drawBackground();
         drawText();
-    }, 40);
+        window.requestAnimationFrame(loop);
+    }
 
-    var drawBackground = function() {
+    var drawBackground = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#79044";
         ctx.fillRect(0, canvas.height * 3 / 4, canvas.width, 1);
     }
 
-    var drawText = function() {
+    var drawText = () => {
         ctx.fillStyle = "#79044";
         for (var x = 0; x < pos.length; x++) {
             pos[x][0] += (des[x][0] - pos[x][0]) * CONST_1;
@@ -60,5 +61,7 @@ document.getElementById("copy").innerHTML = "&copy " + (new Date()).getFullYear(
             if (Math.sqrt(dx * dx + dy * dy) < CONST_2 && Math.random() < CONST_1) pos[x] = [Math.random() * canvas.width, Math.random() * canvas.height];
         }
     }
+
+    window.requestAnimationFrame(loop);
 
 })();

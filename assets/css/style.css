@@ -6,13 +6,12 @@
 }
 
 body {
-    color: #794044;
     background-color: #f0f8ff;
+    color: #794044;
 }
 
 a {
     padding: 0px 10px;
-    color: #794044;
     text-decoration: none;
 }
 
@@ -22,18 +21,6 @@ a:hover {
 
 div {
     width: 100%;
-}
-
-#interative {
-    height: 25%;
-}
-
-#content {
-    height: 70%;
-}
-
-#footer {
-    height: 5%;
 }
 
 img {
@@ -49,4 +36,16 @@ img:hover {
     margin-top: 80px;
     padding: 0px 20px;
     cursor: pointer;
+}
+
+#interative {
+    height: 25%;
+}
+
+#content {
+    height: 70%;
+}
+
+#footer {
+    height: 5%;
 }
