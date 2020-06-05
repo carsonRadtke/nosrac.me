@@ -1,51 +1,47 @@
+
 <html>
 
 <head>
-    <title>Carson Radtke</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/font/BalooChettan-Regular.ttf" />
+    <title>
+        Carson Radtke | Student
+    </title>
+    <link href="./assests/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Chilanka&display=swap" rel="stylesheet">
 </head>
 
-<body onresize="window.location.reload()">
-    <div id="interative">
-        <canvas id="canvas"></canvas>
+<body>
+    <div class="greeting">
+        <canvas id="canvas">
+            Your browser does not support HTML5 Canvas :(
+        </canvas>
     </div>
-    <div id="content">
-        <img title="Github" onclick="window.location='http://github.com/carsonRadtke'" src="assets/img/github.png" />
-        <img title="Instagram" onclick="window.location='http://instagram.com/nosrac25'"
-            src="assets/img/instagram.png" />
-        <img title="Kaggle" onclick="window.location='http://kaggle.com/nosrac25'" src="assets/img/kaggle.png" />
-        <img title="Linkedin" onclick="window.location='http://linkedin.com/in/carsonRadtke'"
-            src="assets/img/linkedin.png" />
-        <img title="Resume" onclick="window.location='assets/resume.pdf'" src="assets/img/resume.png" />
-        <img title="Thingiverse" onclick="window.location='http://thingiverse.com/nosrac25'"
-            src="assets/img/thingiverse.png" />
+    <div class="links">
+        <ul>
+            <li>
+                <a title="Github | carsonRadtke" href="https://github.com/carsonRadtke" class="fab fa-7x fa-github"></a>
+            </li>
+            <li>
+                <a title="LinkedIn | carsonradtke" href="https://www.linkedin.com/in/carsonradtke" class="fab fa-7x fa-linkedin"></a>
+            </li>
+            <li>
+                <a title="Resume | Carson Radtke" href="./assests/resume.pdf" class="far fa-7x fa-address-card"></a>
+            </li>
+        </ul>
     </div>
-    <div id="footer">
+    <div class="info">
+        <p>
+            Computer Science &amp; Mathematics Double Major at the University of Wisconsin - Milwaukee
+        </p>
+    </div>
+    <div class="footer">
         <p id="copy"></p>
+        <noscript>
+            Please Enable JavaScript
+        </noscript>
     </div>
 </body>
 
 </html>
-<script src="assets/js/script.js"></script>
 
-<!-- 
-    
-    TODOs:
-    
-        1. Make this thing look prettier
-            - Font Awesome Icons
-            - Better Colors
-            - Improve Canvas Graphic
-            - Find a better font
-    
-        2. Integrate Ocotoprint REST API
-            - Monitor Jobs
-            - Upload files
-            - Start Jobs
-    
-        3. Backend Upgrades
-            - Transfer to Java Web Server
-            - Host on Raspberry Pi 4
-            - SSL Certificate
-    -->
+<script src="./assests/script.js"></script>
+<script src="https://kit.fontawesome.com/9e9a5b7d3e.js"></script>

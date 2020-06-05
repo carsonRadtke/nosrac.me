@@ -1,67 +1,70 @@
-document.getElementById("copy").innerHTML = "&copy; " + (new Date()).getFullYear() + " Carson Radtke";
+document.getElementById("copy").innerHTML = "&copy;" + (new Date()).getFullYear() + " Carson Radtke";
 
-(() => {
-    var CONST_1 = 0.08;
-    var CONST_2 = 25;
-    var CONST_3 = "Carson Radtke";
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
 
-    var lastX = -CONST_2;
-    var lastY = -CONST_2;
+canvas.width = canvas.parentElement.clientWidth >> 1;
+canvas.height = canvas.width >> 2;
 
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    canvas.width = canvas.parentElement.clientWidth * 2 / 3;
-    canvas.height = canvas.parentElement.clientHeight;
+ctx.fillStyle = "#000000";
+ctx.font = "bold " + (canvas.height / 3) + "px Times New Roman";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("Carson Radtke", canvas.width >> 1, canvas.height >> 1);
 
+let goal = [];
+let curr = [];
+let lastX = -100;
+let lastY = -100;
+
+let kP = 0.025;
+let dist = 20;
+
+var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+canvas.onmousemove = (e) => {
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+}
+
+canvas.onmouseleave = (e) => { lastX = lastY = -100; }
+
+function init() {
+    for (let i = 0; i < data.length; i++) {
+
+        let x = i % canvas.width;
+        let y = Math.ceil(i / canvas.width);
+
+        if (data[i << 2] == 0) {
+            goal.push([x, y]);
+            curr.push([Math.random() * canvas.width, Math.random() * canvas.height]);
+        }
+    }
+    data = null;
+}
+
+function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#794044";
-    ctx.font = (canvas.height / 5) + "px Baloo Chettan, cursive";
-    ctx.fillText(CONST_3, canvas.width >> 1, canvas.height >> 1);
-
-    var pos = [];
-    var des = [];
-
-    for (var x = 0; x < canvas.width; x++) {
-        for (var y = 0; y < canvas.height; y++) {
-            if (ctx.getImageData(x, y, 1, 1).data[0] != 0) {
-                des[des.length] = [x, y];
-                pos[pos.length] = [Math.random() * canvas.width, Math.random() * canvas.height];
-            }
-        }
+    for (let x = 0; x < curr.length; x++) {
+        let dx = goal[x][0] - curr[x][0];
+        let dy = goal[x][1] - curr[x][1];
+        curr[x] = [curr[x][0] + dx * kP, curr[x][1] + dy * kP];
+        dx = curr[x][0] - lastX;
+        dy = curr[x][1] - lastY;
+        if (Math.random() < 0.0001 || (Math.random() < 0.1 && dx * dx + dy * dy < dist * dist)) curr[x] = [Math.random() * canvas.width, Math.random() * canvas.height];
+        ctx.fillRect(curr[x][0], curr[x][1], 1, 1);
     }
-
-    canvas.onmousemove = (e) => {
-        lastX = e.offsetX;
-        lastY = e.offsetY;
-    }
-
-    var loop = () => {
-        drawBackground();
-        drawText();
-        window.requestAnimationFrame(loop);
-    }
-
-    var drawBackground = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#79044";
-        ctx.fillRect(0, canvas.height * 3 / 4, canvas.width, 1);
-    }
-
-    var drawText = () => {
-        ctx.fillStyle = "#79044";
-        for (var x = 0; x < pos.length; x++) {
-            pos[x][0] += (des[x][0] - pos[x][0]) * CONST_1;
-            pos[x][1] += (des[x][1] - pos[x][1]) * CONST_1;
-            ctx.fillRect(pos[x][0], pos[x][1], 1, 1);
-            var dx = lastX - pos[x][0];
-            var dy = lastY - pos[x][1];
-            if (Math.sqrt(dx * dx + dy * dy) < CONST_2 && Math.random() < CONST_1) pos[x] = [Math.random() * canvas.width, Math.random() * canvas.height];
-        }
-    }
-
     window.requestAnimationFrame(loop);
+}
 
-})();
+window.onload = () => {
+    window.requestAnimationFrame(init);
+    window.requestAnimationFrame(loop);
+}
+
+window.onresize = () => {
+    location.reload();
+}
