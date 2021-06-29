@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times new Roman';
+    color: black;
+    background-color: white;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    padding: 3vw;
+    overflow: hidden;
+    float: left;
+    font-size: 1vw;
+}
+
+ul {
+    list-style: none;
+    overflow: hidden;
+    width: fit-content;
+    margin: auto;
+}
+
+li:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.greeting {
+    width: 100vw;
+    height: 20vh;
+}
+
+.links {
+    width: 100%;
+    overflow: hidden;
+}
+
+.info {
+    width: 100vw;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.footer {
+    height: 2rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
