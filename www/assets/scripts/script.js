@@ -115,3 +115,7 @@ $(document).ready(() => {
     init_date();
     init_canvas();
 });
+
+$(window).on('resize', () => {
+    location.reload();
+});
