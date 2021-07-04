@@ -2,7 +2,7 @@ function init_date() {
 
     let copyright_text = `&copy; ${new Date().getFullYear()} Carson Radtke`;
 
-    $("#date_placeholder").html(copyright_text);
+    $("#copyright_placeholder").html(copyright_text);
 
 }
 
@@ -48,13 +48,17 @@ function setup_pixels(canvas, ctx, pixels) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillText("Carson Radtke", canvas.width / 2, canvas.height / 2);
 
-    let image_data = Array.from(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
-
-    let mapped_data = image_data.map((val, idx) => ({ val: val, idx: idx }));
-    let filtered_data = mapped_data.filter(x => x.val > 0);
+    let filtered_data = Array.from(ctx.getImageData(0, 0, canvas.width, canvas.height).data)
+        .map((val, idx) => ({ val: val, idx: idx }))
+        .filter(x => x.val > 0);
 
     filtered_data.forEach(d => {
-        pixels[pixels.length] = { x: Math.random() * canvas.width, y: Math.random() * canvas.height, gx: Math.floor(d.idx / 4) % canvas.width, gy: Math.floor(Math.floor(d.idx / 4) / canvas.width) };
+        pixels[pixels.length] = {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            gx: Math.floor(d.idx / 4) % canvas.width,
+            gy: Math.floor(Math.floor(d.idx / 4) / canvas.width)
+        };
     });
 
 }
@@ -112,10 +116,14 @@ function init_canvas() {
 }
 
 $(document).ready(() => {
+
     init_date();
     init_canvas();
+
 });
 
 $(window).on('resize', () => {
+
     location.reload();
+
 });
