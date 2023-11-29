@@ -1,14 +1,13 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+extern crate wasm_bindgen;
+
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern {
+    fn alert(s: &str);
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[wasm_bindgen]
+pub fn greet() {
+    alert("Hello from Rust!");
 }
