@@ -1,0 +1,28 @@
+{
+  "name": "nosrac.me-ui",
+  "version": "0.0.1",
+  "description": "{type,java}script for nosrac.me's ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carsonRadtke/nosrac.me.git"
+  },
+  "keywords": [
+    "animation",
+    "particle",
+    "visual",
+    "effects"
+  ],
+  "author": "carson radtke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carsonRadtke/nosrac.me/issues"
+  },
+  "homepage": "https://github.com/carsonRadtke/nosrac.me#readme",
+  "dependencies": {
+    "typescript": "^5.3.2"
+  }
+}
