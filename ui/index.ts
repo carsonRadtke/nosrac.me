@@ -1,3 +1,5 @@
-import * as wasm from "../animation/pkg"
+import init, { greet } from '../animation/pkg/animation'
 
-wasm.greet();
+init().then(() => {
+  greet();
+});
