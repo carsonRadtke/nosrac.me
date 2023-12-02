@@ -20,7 +20,10 @@ function setupCTX(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   ctx.textBaseline = "middle";
 }
 
-function setupEvents(canvas: HTMLCanvasElement, lastMouse: { x: number, y: number }) {
+function setupEvents(
+  canvas: HTMLCanvasElement,
+  lastMouse: { x: number; y: number },
+) {
   const rect = canvas.getBoundingClientRect();
 
   canvas.onmousemove = (ev) => {
@@ -33,7 +36,11 @@ function setupEvents(canvas: HTMLCanvasElement, lastMouse: { x: number, y: numbe
   };
 }
 
-function setupPixels(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, pixels: { x: number, y: number, gx: number, gy: number }[]) {
+function setupParticles(
+  canvas: HTMLCanvasElement,
+  ctx: CanvasRenderingContext2D,
+  system: wasm.System,
+) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillText("Carson Radtke", canvas.width / 2, canvas.height / 2);
 
@@ -44,52 +51,27 @@ function setupPixels(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, p
     .filter((x) => x.val > 0);
 
   filteredData.forEach((d) => {
-    pixels[pixels.length] = {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      gx: Math.floor(d.idx / 4) % canvas.width,
-      gy: Math.floor(Math.floor(d.idx / 4) / canvas.width),
-    };
+    system.add_particle(
+      Math.floor(d.idx / 4) % canvas.width,
+      Math.floor(Math.floor(d.idx / 4) / canvas.width),
+    );
   });
 }
 
 function initCanvas() {
   const canvas = document.getElementById("my_canvas") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d")!;
-
-  const pixels: { x: number, y: number, gx: number, gy: number }[] = [];
   const lastMouse = { x: -100, y: -100 };
 
   setupDOM(canvas);
   setupCTX(canvas, ctx);
   setupEvents(canvas, lastMouse);
 
-  setupPixels(canvas, ctx, pixels);
-
-  const drawBackground = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  };
-
-  const drawForeground = () => {
-    pixels.forEach((pix) => {
-      pix.x += (0.05 + Math.random() * 0.1) * (pix.gx - pix.x);
-      pix.y += (0.05 + Math.random() * 0.1) * (pix.gy - pix.y);
-
-      const dx = pix.x - lastMouse.x;
-      const dy = pix.y - lastMouse.y;
-
-      if (dx * dx + dy * dy < Math.pow(5 + Math.random() * 20, 2)) {
-        pix.x = Math.random() * canvas.width;
-        pix.y = Math.random() * canvas.height;
-      }
-
-      ctx.fillRect(pix.x, pix.y, 1, 1);
-    });
-  };
+  const system = wasm.System.new(canvas.width, canvas.height);
+  setupParticles(canvas, ctx, system);
 
   window.requestAnimationFrame(function canvasLoop() {
-    drawBackground();
-    drawForeground();
+    system.tick(lastMouse.x, lastMouse.y, ctx);
 
     window.requestAnimationFrame(canvasLoop);
   });
