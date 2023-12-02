@@ -1,70 +1,83 @@
 <html>
-
-<head>
+  <head>
     <title>Carson Radtke</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&family=Staatliches&display=swap"
-        rel="stylesheet">
-    <link href="./assets/styles/styles.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&family=Staatliches&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./assets/styles/styles.css" rel="stylesheet" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <div class="row h-25">
+      <div class="row h-25"></div>
+      <div class="row h-50">
+        <div class="container">
+          <div class="row h-50">
+            <canvas id="my_canvas"></canvas>
+          </div>
 
+          <div class="row h-50 align-content-center">
+            <ul class="list-group w-100 list-group-horizontal">
+              <li class="list-group-item border-0 flex-fill text-center">
+                <a
+                  title="LinkedIn | carsonRadtke"
+                  class="opaque_hover text-dark"
+                  href="https://www.linkedin.com/in/carsonradtke/"
+                >
+                  <i class="fab fa-linkedin-in fa-9x card-img-top"></i>
+                </a>
+              </li>
+              <li class="list-group-item border-0 flex-fill text-center">
+                <a
+                  title="GitHub | carsonRadtke"
+                  class="opaque_hover text-dark"
+                  href="https://github.com/carsonRadtke"
+                >
+                  <i class="fab fa-github fa-9x card-img-top"></i>
+                </a>
+              </li>
+              <li class="list-group-item border-0 flex-fill text-center">
+                <a
+                  title="Resume"
+                  class="opaque_hover text-dark"
+                  href="./assets/radtke_resume.pdf"
+                >
+                  <i class="far fa-file fa-9x card-img-top"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="row h-50">
-
-            <div class="container">
-
-                <div class="row h-50">
-
-                    <canvas id="my_canvas"></canvas>
-
-                </div>
-
-                <div class="row h-50 align-content-center">
-
-                    <ul class="list-group w-100 list-group-horizontal">
-                        <li class="list-group-item border-0 flex-fill text-center">
-                            <a title="LinkedIn | carsonRadtke" class="opaque_hover text-dark"
-                                href="https://www.linkedin.com/in/carsonradtke/">
-                                <i class=" fab fa-linkedin-in fa-9x card-img-top"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0 flex-fill text-center">
-                            <a title="GitHub | carsonRadtke" class="opaque_hover text-dark"
-                                href="https://github.com/carsonRadtke">
-                                <i class=" fab fa-github fa-9x card-img-top"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0 flex-fill text-center">
-                            <a title="Resume" class="opaque_hover text-dark" href="./assets/radtke_resume.pdf">
-                                <i class="far fa-file fa-9x card-img-top"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-
+      </div>
+      <div class="row h-25">
+        <div class="col text-center text-bottom">
+          <span id="copyright_placeholder"></span>
         </div>
-        <div class="row h-25">
-            <div class="col text-center text-bottom">
-                <span id="copyright_placeholder"></span>
-            </div>
-        </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+  crossorigin="anonymous"
+></script>
 <script src="./assets/scripts/script.js"></script>
