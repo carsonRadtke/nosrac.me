@@ -1,5 +1,7 @@
 import initWasm, * as wasm from "../animation/pkg/animation";
 
+const CANVAS_TEXT = "Carson Radtke";
+
 function initDate() {
   const cpright = `&copy; ${new Date().getFullYear()} Carson Radtke`;
 
@@ -14,10 +16,37 @@ function setupDOM(canvas: HTMLCanvasElement) {
   canvas.height = $parent.height()!;
 }
 
+function computeFont(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  size: number,
+) {
+  ctx.font = `${size}px 'Courier New', monospace`;
+  while (ctx.measureText(CANVAS_TEXT).width > width) {
+    size = Math.floor(size * 0.99);
+    ctx.font = `${size}px 'Courier New', monospace`;
+  }
+  while (
+    ctx.measureText(CANVAS_TEXT).fontBoundingBoxAscent +
+      ctx.measureText(CANVAS_TEXT).fontBoundingBoxDescent >
+    height
+  ) {
+    size = Math.floor(size * 0.99);
+    ctx.font = `${size}px 'Courier New', monospace`;
+  }
+}
+
 function setupCTX(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  ctx.font = `${Math.floor(canvas.height * 0.6)}px Staatliches`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
+  computeFont(
+    ctx,
+    canvas.width,
+    canvas.height,
+    Math.max(canvas.width, canvas.height),
+  );
+  console.log(ctx.measureText(CANVAS_TEXT));
 }
 
 function setupEvents(
@@ -42,7 +71,7 @@ function setupParticles(
   system: wasm.System,
 ) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillText("Carson Radtke", canvas.width / 2, canvas.height / 2);
+  ctx.fillText(CANVAS_TEXT, canvas.width / 2, canvas.height / 2);
   const filteredData = Array.from(
     ctx.getImageData(0, 0, canvas.width, canvas.height).data,
   )
