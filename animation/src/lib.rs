@@ -3,6 +3,10 @@ extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 use web_sys::CanvasRenderingContext2d;
 
+const MIN_DELTA_PROP: f64 = 0.05;
+const DELTA_PROP_RANGE_SIZE: f64 = 0.1;
+const MOUSE_MAX_RADIUS: f64 = 25.;
+
 #[wasm_bindgen]
 pub struct Particle {
     x: f64,
@@ -16,8 +20,8 @@ impl Particle {
     fn tick(&mut self) {
         let dx = self.home_x - self.x;
         let dy = self.home_y - self.y;
-        self.x += 0.05 + rand::random::<f64>() * 0.1 * dx;
-        self.y += 0.05 + rand::random::<f64>() * 0.1 * dy;
+        self.x += MIN_DELTA_PROP + rand::random::<f64>() * DELTA_PROP_RANGE_SIZE * dx;
+        self.y += MIN_DELTA_PROP + rand::random::<f64>() * DELTA_PROP_RANGE_SIZE * dy;
     }
 }
 
@@ -53,7 +57,9 @@ impl System {
             {
                 let dx = mouse_x - *x;
                 let dy = mouse_y - *y;
-                if dx * dx + dy * dy < rand::random::<f64>().powf(5.) * 25. * 25. {
+                if dx * dx + dy * dy
+                    < rand::random::<f64>().powf(5.) * MOUSE_MAX_RADIUS * MOUSE_MAX_RADIUS
+                {
                     particle.x = self.width * rand::random::<f64>();
                     particle.y = self.height * rand::random::<f64>();
                     continue;
