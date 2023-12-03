@@ -38,11 +38,16 @@ impl System {
         };
     }
 
-    pub fn pos(&self) -> String {
-        return format!("({}, {})", self.width, self.height);
+    pub fn add_particle(&mut self, home_x: f64, home_y: f64) {
+        self.particles.push(Particle {
+            x: self.width * rand::random::<f64>(),
+            y: self.height * rand::random::<f64>(),
+            home_x,
+            home_y,
+        });
     }
 
-    pub fn tick(&mut self, mouse_x: f64, mouse_y: f64, ctx: &CanvasRenderingContext2d) {
+    fn update_particles(&mut self, mouse_x: f64, mouse_y: f64) {
         for particle in self.particles.iter_mut() {
             let Particle { x, y, .. } = particle;
             {
@@ -56,21 +61,12 @@ impl System {
             }
             particle.tick()
         }
-        self.render(ctx)
     }
 
-    pub fn add_particle(&mut self, home_x: f64, home_y: f64) {
-        self.particles.push(Particle {
-            x: self.width * rand::random::<f64>(),
-            y: self.height * rand::random::<f64>(),
-            home_x,
-            home_y,
-        });
-    }
-
-    fn render(&self, ctx: &CanvasRenderingContext2d) {
+    pub fn tick(&mut self, mouse_x: f64, mouse_y: f64, ctx: &CanvasRenderingContext2d) {
         self.draw_background(ctx);
-        self.draw_particles(ctx);
+        self.update_particles(mouse_x, mouse_y);
+        self.draw_particles(ctx)
     }
 
     fn draw_background(&self, ctx: &CanvasRenderingContext2d) {

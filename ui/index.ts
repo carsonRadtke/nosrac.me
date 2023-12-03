@@ -43,7 +43,6 @@ function setupParticles(
 ) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillText("Carson Radtke", canvas.width / 2, canvas.height / 2);
-
   const filteredData = Array.from(
     ctx.getImageData(0, 0, canvas.width, canvas.height).data,
   )

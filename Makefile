@@ -29,4 +29,5 @@ clean:
 	rm -rf www/assets/scripts/index.js www/assets/wasm/pkg
 
 format:
-	prettier . --write
+	prettier --write ui
+	cd animation && cargo fmt
