@@ -1,5 +1,5 @@
 # nosrac.me
-https://norsrac.me
+https://nosrac.me
 
 ### Running Locally
 
