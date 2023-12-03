@@ -48,7 +48,7 @@ impl System {
             {
                 let dx = mouse_x - *x;
                 let dy = mouse_y - *y;
-                if dx * dx + dy * dy < 25. * 25. {
+                if dx * dx + dy * dy < rand::random::<f64>().powf(5.) * 25. * 25. {
                     particle.x = self.width * rand::random::<f64>();
                     particle.y = self.height * rand::random::<f64>();
                     continue;
