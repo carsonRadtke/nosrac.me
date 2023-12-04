@@ -2,12 +2,6 @@ import initWasm, * as wasm from "../animation/pkg/animation";
 
 const CANVAS_TEXT = "Carson Radtke";
 
-function initDate() {
-  const cpright = `&copy; ${new Date().getFullYear()} Carson Radtke`;
-
-  $("#copyright_placeholder").html(cpright);
-}
-
 function setupDOM(canvas: HTMLCanvasElement) {
   const $canvas = $(canvas);
   const $parent = $canvas.parent();
@@ -106,7 +100,6 @@ function initCanvas() {
 }
 
 $((): void => {
-  initDate();
   initWasm().then(() => {
     initCanvas();
   });
