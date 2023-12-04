@@ -1,6 +1,6 @@
 import initWasm, * as wasm from "../animation/pkg/animation";
 
-const CANVAS_TEXT = "Carson Radtke";
+const CANVAS_TEXT = "carson radtke";
 
 function setupDOM(canvas: HTMLCanvasElement) {
   const $canvas = $(canvas);
