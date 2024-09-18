@@ -19,6 +19,8 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - run: make 
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
